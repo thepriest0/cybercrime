@@ -120,9 +120,37 @@ def admin_dashboard():
 
     total_users = User.query.count()
     total_reports = Report.query.count()
-    visits = 0  # Implement a visit count logic if necessary
+    visits = get_total_visits()  # You need to implement this function
+    growth_rate = calculate_growth_rate()  # Implement this function
+    unresolved_issues = get_unresolved_issues_count()  # Implement this function
+    resolved_issues = get_resolved_issues_count()  # Implement this function
 
-    return render_template('admin_dashboard.html', total_users=total_users, total_reports=total_reports, visits=visits)
+   
+    return render_template('admin_dashboard.html',
+                           total_users=total_users,
+                           total_reports=total_reports,
+                           visits=visits,
+                           growth_rate=growth_rate,
+                           unresolved_issues=unresolved_issues,
+                           resolved_issues=resolved_issues)
+
+def get_total_visits():
+    # Implement logic to get total visits
+    return 1234  # Example value
+
+def calculate_growth_rate():
+    # Implement logic to calculate growth rate
+    return "5%"  # Example value
+
+def get_unresolved_issues_count():
+    # Implement logic to count unresolved issues
+    unresolved_issues = Report.query.filter_by(status='unresolved').count()  # Example query
+    return unresolved_issues
+
+def get_resolved_issues_count():
+    # Implement logic to count resolved issues
+    resolved_issues = Report.query.filter_by(status='resolved').count()  # Example query
+    return resolved_issues
 
 @app.route('/admin_settings', methods=['GET', 'POST'])
 def admin_settings():
